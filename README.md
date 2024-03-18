@@ -31,8 +31,8 @@ DEMO
 ```bash
 python get_data.py --model_name "gpt-3.5-turbo" \
 --schema_name "PersonDialogue" \
---data_type "url"
---data "http://www.gudianmingzhu.com/guji/hongloumeng/11369.html"
+--data_type "url" \
+--data "http://www.gudianmingzhu.com/guji/hongloumeng/11369.html" \
 --chunk_size 500
 ```
 
