@@ -9,6 +9,7 @@ from modelscope import snapshot_download, AutoTokenizer, AutoModelForCausalLM
 
 from langchain_core.messages import HumanMessage, SystemMessage
 from utils import get_conf
+import torch
 
 class InterLM2LLM(LLM):
     tokenizer : AutoTokenizer = None
@@ -22,9 +23,13 @@ class InterLM2LLM(LLM):
         super().__init__()
         print("正在从本地加载模型...")
         cache_dir, = get_conf("model_cache_dir")
-        model_dir = snapshot_download(model_id=model_name, local_files_only=True, cache_dir=cache_dir)
+        # model_dir = snapshot_download(model_id=model_name, local_files_only=True, cache_dir=cache_dir)
+        model_dir = cache_dir + model_name
         self.tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(model_dir, trust_remote_code=True)
+        
+        if torch.cuda.is_available():
+            self.model = self.model.to("cuda")
         # 将代码设置为评估模式
         self.model = self.model.eval()
         print("完成本地模型的加载")

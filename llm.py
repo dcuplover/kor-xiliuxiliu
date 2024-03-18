@@ -16,7 +16,7 @@ def get_llm(model_name: str) -> LLM:
         return QianFanLLM(model_name)
     elif model_name in platform_list['openai']:
         return OpenAILLM(model_name)
-    elif model_name in platform_list['interlm2']:
+    elif model_name in platform_list['internlm2']:
         return InterLM2LLM(model_name)
     else:
         raise ValueError(f"Unsupported model name: {model_name}")
