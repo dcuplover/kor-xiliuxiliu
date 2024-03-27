@@ -27,6 +27,7 @@ def extract_content(llm, schema, texts, validator, model_name, schema_name):
     # 判断是否执行提取
     # 如果不执行，就直接返回
     if not extract:
+        print('无需执行采集')
         return
     
     for text in texts:

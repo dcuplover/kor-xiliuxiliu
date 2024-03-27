@@ -8,11 +8,12 @@ from lmdeploy.serve.openai.api_client import APIClient
 class Internlm2ImdeployLLM(LLM):
     temperature: float = 0.1
     model_name: str = ""
+    api_client: APIClient = None
     @property
     def _llm_type(self) -> str:
-        return "Internlm2"
+        return "Internlm2_deploy"
 
-    def __init__(self, model_name: str, openai_api_key: str, openai_api_base: str):
+    def __init__(self, model_name: str):
         super().__init__()
         temperature, base_url = get_conf("temperature", "internlm2_deploy_api_base")
         self.temperature = temperature
@@ -36,7 +37,11 @@ class Internlm2ImdeployLLM(LLM):
             ],
             temperature=self.temperature,
         )
-        return response.choices[0].message.content
+        print('调用结束,处理返回结果')
+        print(response)
+        for item in response:
+            return item["choices"][0]["message"]["content"]
+        
 
     @property
     def _identifying_params(self) -> Mapping[str, Any]:

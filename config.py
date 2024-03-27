@@ -3,7 +3,8 @@ PLATFORM_LIST = {
     "zhipu": ["glm-3-turbo", "glm-4"],
     "qianfan": ["Mixtral-8x7B-Instruct", "Yi-34B-Chat"],
     "openai": ["gpt-3.5-turbo", "gpt-4"],
-    "internlm2": [""],
+    "internlm2": [],
+    "internlm2_lmdeploy": ["internlm2-chat-7b"],
 }
 
 # 是否反查提取的内容是否存在于原文中
@@ -45,6 +46,8 @@ OPENAI_API_BASE = ""
 # cache_dir
 MODEL_CACHE_DIR = "/data/models/"
 
+# internlm2 lmdeploy
+INTERNLM2_DEPLOY_API_BASE = "http://localhost:23333"
 
 
 

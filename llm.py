@@ -1,7 +1,7 @@
 from langchain_core.language_models.llms import LLM
 from utils import get_conf
 
-from llms import InterLM2LLM, TongyiLLM, OpenAILLM, QianFanLLM, ZhiPuLLM
+from llms import InterLM2LLM, TongyiLLM, OpenAILLM, QianFanLLM, ZhiPuLLM, Internlm2ImdeployLLM
 
 def get_llm(model_name: str) -> LLM:
     # 根据模型名字判断使用的哪个平台
@@ -18,6 +18,8 @@ def get_llm(model_name: str) -> LLM:
         return OpenAILLM(model_name)
     elif model_name in platform_list['internlm2']:
         return InterLM2LLM(model_name)
+    elif model_name in platform_list['internlm2_lmdeploy']:
+        return Internlm2ImdeployLLM(model_name)
     else:
         raise ValueError(f"Unsupported model name: {model_name}")
 
